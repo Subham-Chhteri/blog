@@ -1,40 +1,33 @@
-const express = require('express');
-const app=express();
-const trackerRoutes = require('./routes/trackerRoutes');
-const seedDB = require('./seed');
-const mongoose = require('mongoose');
-const path = require('path');
-const methodOverride = require('method-override');
+const express = require("express");
+const cors = require("cors");
+const mongoose = require("mongoose");
+require("dotenv/config");
 
-app.get('/', (req, res) => {
-    res.send('use /blog to access BLOG');
-});
+const app = express();
+const port = process.env.PORT || 2323;
 
-
-
-
-
-mongoose.connect('mongodb://localhost:27017/tracker-db')
-.then(()=>{
-    console.log('DB Connected');
-})
-.catch((err)=>{
-    console.log(err);
-});
-
-seedDB();
-
-app.set('view engine', 'ejs');
-app.set('views',path.join(__dirname,'views'));
-app.use(express.static(path.join(__dirname,'public')));
+app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride('_method'));
+app.use(cors());
 
+app.use("/api/quotes", require("./routes/quotes"));
 
-
-app.use(trackerRoutes);
-
-app.listen(8080, (req, res) => {
-    console.log("Server Started At Port 8080 ");
+mongoose.connect(process.env.DB_CONNECTION).then(() => {
+  console.log("...");
 });
 
+mongoose.connect(
+  process.env.DB_CONNECTION,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+  function (err) {
+    if (err) throw err;
+    else console.log("Connected");
+  }
+);
+
+app.listen(port, (req, res) => {
+  console.log("Server Started At Port 2323");
+});
