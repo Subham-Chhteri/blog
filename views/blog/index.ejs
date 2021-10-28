@@ -1,0 +1,32 @@
+<%- include("../partials/header") %>
+<%- include("../partials/navbar") %>
+
+
+<main class="container">
+
+    <table class="table">
+        <thead>
+            <tr class="table-success">
+                <th scope="col">Author</th>
+                <th scope="col">Blog</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% for(let tracks of tracker){ %>
+            <tr>
+            
+                <td><%=tracks.author%></td>
+                <td><%=tracks.text%></td>
+                <td><a href="/blog/<%=tracks._id %> " class="btn btn-info"> Details</a></td>
+
+              
+
+
+            </tr>
+            <%}%>
+      </table>
+</main>
+
+
+<%- include("../partials/footer") %>

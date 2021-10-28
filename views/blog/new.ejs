@@ -1,0 +1,24 @@
+<%- include("../partials/header") %> 
+<%- include("../partials/navbar") %> 
+
+
+<main class="container">
+
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h1 class="display-6 mb-3">New Quote</h1>
+            <form action="/blog" method="POST">
+                <div class="mb-3">
+                    <label for="author" class="form-label">Author</label>
+                    <input type="text" class="form-control" name="author" id="author" placeholder="author">
+                </div>
+                <div class="mb-3">
+                    <label for="text" class="form-label">Quote</label>
+                    <textarea class="form-control" name="text" id="desc" rows="5"></textarea>
+                </div> 
+                <button type="submit" class="btn btn-success btn-small">Submit</button>
+            </form>
+        </div>
+    </div>
+</main>
+<%- include("../partials/footer") %> 
